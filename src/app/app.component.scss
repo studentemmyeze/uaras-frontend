@@ -1,0 +1,84 @@
+p {
+  font-family: Lato;
+}
+
+
+.for-status {
+  padding-top:15px;
+  padding-left: 30px;
+  font-size:40px;
+  text-align:center;
+  font-weight:bold;
+
+}
+
+.pay-container2 {
+  display:  inline-flex ;
+  /* height: 300px; */
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  align-items:flex-start;
+  min-width: 90%;
+}
+
+.container-c1 {
+  /* flex-direction: column ;
+  display: inline-flex ; */
+  min-width: 650px;
+  /* flex-flow: column wrap;
+  flex-wrap: wrap; */
+
+  /* margin-left: 5px; */
+  /* justify-content: space-between; */
+  /* min-height: 300px; */
+}
+
+/* Medium screens */
+@media all and (max-width: 800px) {
+  .pay-container, .pay-container2 {
+    /* When on medium sized screens, we center it by evenly distributing empty space around items */
+    justify-content: space-around;
+    /* padding-right: 20px; */
+
+  }
+}
+
+/* Small screens */
+@media all and (max-width: 500px) {
+  .pay-container, .pay-container2 {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+}
+
+div{
+  padding-bottom: 15px;
+}
+
+.container {
+  display: flex; /* or inline-flex */
+  height: 300px;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+}
+
+.childchild {
+  text-decoration: none;
+  display: block;
+  padding: 1em;
+}
+
+.time-display {
+  /* display: flex; */
+  align-items:right;
+  padding-left:60px;
+}
+
+.errors-highlight {
+  color: red;
+}
+
+.move-left {padding-left: 40px;}
+
+
