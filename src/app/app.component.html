@@ -368,13 +368,15 @@
               {{stat}}
             </mat-option>
           </mat-select>
-          <mat-hint>e.g. UNIZIK-0, UMUNZE-1, AUCHI-2, POPE JOHN-3, ESCET-4 </mat-hint>
+<!--          <mat-hint>e.g. UNIZIK-0, UMUNZE-1, AUCHI-2, POPE JOHN-3, ESCET-4 </mat-hint>-->
           <mat-error>Candidate type required!</mat-error>
         </mat-form-field>
       </div>
+      <!-- <div><p>UNIZIK-0, UMUNZE-1, AUCHI-2, POPE JOHN-3, ESCET-4</p></div> -->
       <div>
-        <input type="file" (change)= "upload($event)" accept=".xlsx,.xls" multiple="false"/>
+        <input type="file" (change)= "upload($event)" accept=".xlsx,.xls" [multiple]="false"/>
       </div>
+
       <div>
         <!-- <button (click)="uploadButton()">Upload</button> -->
         <button mat-stroked-button color="primary" (click)="uploadButton()" > <mat-icon>upload</mat-icon>Upload</button>
@@ -472,6 +474,249 @@
 
 
 
+
+
+</div>
+<div class="content">
+  <mat-card>
+
+    <h2>Push Qualified Data</h2>
+
+ <mat-radio-group (change)="resetAPIParams()"
+           aria-labelledby="example-radio-group-label"
+           class="example-radio-group"
+           [(ngModel)]="pushOption">
+      <mat-radio-button class="example-radio-button" *ngFor="let season of optionsMap.keys()" [value]="season">
+       {{season}}
+     </mat-radio-button>
+   </mat-radio-group>
+
+    <p>{{pushOption}}</p>
+
+    <div>
+      <form>
+        <mat-checkbox [(ngModel)]="checkedOption[0]" name="checkedstart">
+          <mat-form-field>
+            <mat-label>Start</mat-label>
+            <input matInput placeholder="begin point" [(ngModel)]="selectedModel.start" name="starts" [disabled] = "!checkedOption[0]">
+          </mat-form-field>
+        </mat-checkbox>
+        <!--        <p>{{checkedstart}}</p>-->
+        <mat-checkbox [(ngModel)]="checkedOption[1]" name="checkedstop">
+          <mat-form-field>
+            <mat-label>Stop</mat-label>
+            <input matInput placeholder="stop point" [(ngModel)]="selectedModel.stop" name="stops" [disabled] = "!checkedOption[1]">
+          </mat-form-field>
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="checkedOption[2]" name="checkedsdate">
+
+          <mat-form-field (click)="pickerBD.open()">
+            <mat-label>BEGIN DATE</mat-label>
+            <input matInput  [matDatepicker]="pickerBD"  disabled
+                   [(ngModel)]= "selectedModel.sDate"
+                   name="beginDate">
+            <mat-datepicker-toggle
+                    matSuffix [for]="pickerBD"></mat-datepicker-toggle>
+            <mat-datepicker #pickerBD [disabled]= "!checkedOption[2]"></mat-datepicker>
+            <mat-hint>e.g. 22-06-2000</mat-hint>
+
+          </mat-form-field>
+
+        </mat-checkbox>
+
+
+        <mat-checkbox [(ngModel)]="checkedOption[3]" name="checkedbatchsize">
+          <mat-form-field class="example-full-width">
+            <mat-label>Batch Size</mat-label>
+            <input matInput placeholder="batchsize" [(ngModel)]="selectedModel.batchsize" name="batchsizes" [disabled] = "!checkedOption[3]">
+          </mat-form-field>
+        </mat-checkbox>
+
+        <mat-checkbox [(ngModel)]="checkedOption[4]" name="checkeddelay">
+          <mat-form-field class="example-full-width">
+            <mat-label>Delay(s)</mat-label>
+            <input matInput placeholder="delay(s)" [(ngModel)]="selectedModel.delay" name="delays" [disabled] = "!checkedOption[4]">
+          </mat-form-field>
+        </mat-checkbox>
+
+        <mat-checkbox [(ngModel)]="checkedOption[5]" name="checkedprogramme">
+          <mat-form-field class="example-full-width">
+            <mat-label>Programme</mat-label>
+            <input matInput placeholder="programme" [(ngModel)]="selectedModel.programme" name="programme" [disabled] = "!checkedOption[5]">
+          </mat-form-field>
+        </mat-checkbox>
+
+
+      </form>
+    </div>
+    
+    <button mat-stroked-button color="primary" (click)="push2Chuka()" > <mat-icon>upload</mat-icon>PUSH</button>
+    <mat-card>
+      <p>Push Dashboard</p>
+      <p>status: {{selectedStatusPushMessage.status}}</p>
+      <p>time taken: {{selectedStatusPushMessage.time_taken}}</p>
+      <p>successful push results: {{selectedStatusPushMessage.total_rowdata_pushed_to_api}} / {{selectedStatusPushMessage.total2push}}</p>
+      <p>Error sending: {{selectedStatusPushMessage.total_error}}</p>
+      <p>Number of batches sent: {{selectedStatusPushMessage.total_successful_batch}}</p>
+
+    </mat-card>
+
+
+  </mat-card>
+</div>
+
+<div class="content">
+  <mat-card>
+    <mat-toolbar>DE Candidates Upload</mat-toolbar>
+
+<div class="pay-container2">
+  <mat-card class="mat-elevation-z5">
+
+
+    <h2>DE Upload</h2>
+    <p>Choose File (.xlx or .xlsx)</p>
+
+    <!-- <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px"> -->
+      <!-- <p>Choose File (.xlx or .xlsx)</p>
+
+
+
+
+
+    <mat-progress-spinner
+              class="example-margin"
+
+              [mode]= "mode"
+              [value]= "spinnerValue">
+    </mat-progress-spinner> -->
+
+
+      <!-- <button mat-stroked-button color="primary" type="submit" > <mat-icon>upload</mat-icon>Upload</button> -->
+    <!-- </div> -->
+  <!-- </mat-card> -->
+
+  <!-- <mat-card> -->
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-select [(ngModel)]= "candidateTypeDE"
+
+                      required
+                      name = "candidateTypeDE" >
+            <!-- candidateTypeList -->
+            <!-- <mat-option></mat-option> -->
+            <mat-option *ngFor="let stat of schoolMap.keys() " [value]= "stat">
+              {{stat}}
+            </mat-option>
+          </mat-select>
+            <!-- <mat-hint>e.g. UNIZIK-0, UMUNZE-1, AUCHI-2, POPE JOHN-3, ESCET-4 </mat-hint> -->
+            <mat-error>Candidate type required!</mat-error>
+  </mat-form-field>
+  </div>
+
+  <!-- <div><p>UNIZIK-0, UMUNZE-1, AUCHI-2, POPE JOHN-3, ESCET-4</p></div> -->
+      
+
+
+
+
+  <div>
+      <input type="file" (change)= "uploadDE($event)" accept=".xlsx,.xls" multiple="false"/>
+  </div>
+<div>
+      <!-- <button (click)="uploadButton()">Upload</button> -->
+      <button mat-stroked-button color="primary" (click)="uploadButtonDE()" > <mat-icon>upload</mat-icon>Upload</button>
+      Upload Percent: {{percentDoneDE}}% <br />
+    </div>
+  </mat-card>
+<br>
+  <mat-card class="mat-elevation-z5 move-left">
+    <h2>Upload Dashboard</h2>
+    <div class="container-c1">
+
+      <!-- <mat-grid-list cols="2" rowHeight="40px"> -->
+        <h3><span>Upload status- {{selectedStatusMessageDE.status}}</span><span class="time-display">time taken- {{selectedStatusMessageDE.time_taken}}</span></h3>
+
+      <!-- </mat-grid-list> -->
+
+
+    <mat-grid-list cols="2" rowHeight="80px">
+      <mat-grid-tile>
+        <!-- <section class="example-section"> -->
+        <mat-progress-bar
+            class="example-margin"
+            [color]="color"
+            [mode]="totalmodeDE"
+            [value]="totalvalueDE"
+            >
+        </mat-progress-bar>
+      <!-- </section> -->
+    </mat-grid-tile>
+      <mat-grid-tile>
+        {{totalvalue| number: '1.0-0'}}% Complete</mat-grid-tile>
+
+    </mat-grid-list>
+
+    </div>
+    <div>
+      <h3 class="example-h2">Processing details</h3>
+      <mat-grid-list cols="5" rowHeight="80px">
+        <mat-grid-tile [colspan]="1">
+          <!-- <section class="example-section"> -->
+          <mat-progress-bar
+              class="example-margin"
+              [color]="color"
+              [mode]="tempmodeDE"
+            [value]="tempvalueDE">
+          </mat-progress-bar>
+        <!-- </section> -->
+      </mat-grid-tile >
+
+        <mat-grid-tile [colspan]="1">{{tempvalueDE| number: '1.0-0'}}% Temp table upload</mat-grid-tile>
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+          <!-- <section class="example-section"> -->
+          <mat-progress-bar
+              class="example-margin"
+              [color]="color"
+              [mode]="mainmodeDE"
+            [value]="mainvalueDE">
+          </mat-progress-bar>
+        <!-- </section> -->
+      </mat-grid-tile >
+
+        <mat-grid-tile [colspan]="1">{{mainvalueDE| number: '1.0-0'}}% Processed</mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1"> <p class="for-status">{{selectedStatusMessageDE.total_rowdata_uploaded_to_api}}</p></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> Total Records from Excel</mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> </mat-grid-tile>
+        <mat-grid-tile [colspan]="1">
+
+        <p class="for-status">{{selectedStatusMessageDE.new_rowdata_in_main}}</p>
+      </mat-grid-tile >
+
+        <mat-grid-tile [colspan]="1"> added to Main table</mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1"> <p class="for-status errors-highlight">{{selectedStatusMessageDE.rowdata_error}}</p></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> Total Errors</mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> </mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> <p class="for-status">{{selectedStatusMessageDE.rowdata_info_updated}}</p></mat-grid-tile>
+        <mat-grid-tile [colspan]="1"> Updated on Main table</mat-grid-tile>
+
+
+
+
+      </mat-grid-list>
+
+
+    </div>
+
+
+
+  </mat-card>
+
+</div>
+  </mat-card>
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

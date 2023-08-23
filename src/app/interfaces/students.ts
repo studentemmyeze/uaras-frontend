@@ -200,3 +200,15 @@ export interface StatusMessage{
     type: string
 
 }
+
+export interface StatusPushMessage{
+    status: string,
+    pushParams: {},
+    status_message: string,
+    time_taken: string,
+    total_rowdata_pushed_to_api: number,
+    total_successful_batch: number,
+    total_error: number,
+    total2push: number,
+    type:string    
+}

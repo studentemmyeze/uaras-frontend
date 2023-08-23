@@ -18,6 +18,7 @@ p {
   flex-flow: row wrap;
   justify-content: space-between;
   padding-bottom: 5px;
+  padding-right: 2px;
   align-items:flex-start;
   min-width: 90%;
 }
@@ -80,5 +81,18 @@ div{
 }
 
 .move-left {padding-left: 40px;}
+
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
 
 

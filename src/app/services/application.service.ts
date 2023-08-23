@@ -12,6 +12,9 @@ export class ApplicationService {
   apiUrl2 = 'http://localhost:8000';
   passMarkList: BehaviorSubject<PassMark[]> = new BehaviorSubject <PassMark[]>([]);
   StatusMessageUTME: BehaviorSubject<any> = new BehaviorSubject <any>({});
+  StatusMessageDE: BehaviorSubject<any> = new BehaviorSubject <any>({});
+  StatusMessagePushUTME: BehaviorSubject<any> = new BehaviorSubject <any>({});
+  StatusMessagePushDE: BehaviorSubject<any> = new BehaviorSubject <any>({});
 
 
   constructor(private http: HttpClient) { }
@@ -148,7 +151,37 @@ export class ApplicationService {
           // answer = []
           console.log('Received data from API', data)
           // answer.push(data)
-          this.StatusMessageUTME.next(data.statusMessage);
+          if (type === 'UTME') {
+            this.StatusMessageUTME.next(data.statusMessage);
+          }
+          else if (type === 'DE') {
+            this.StatusMessageDE.next(data.statusMessage);
+          }
+          // BS.complete();
+        });
+
+    // return BS;
+  }
+
+  getPushStatus(type:string="UTME", lastOpStat?: string): void{
+    // const BS: AsyncSubject<any[]> = new AsyncSubject <any[]>();
+    let queryParams = new HttpParams();
+
+    queryParams = queryParams.append("type", type );
+    // ts-ignore
+    queryParams = lastOpStat ? queryParams.append("lastOpStat", lastOpStat ) : queryParams;
+    let answer = []
+    this.http.get<{statusMessage: StatusMessage}>(`${this.apiUrl}/api/push-status`,{params:queryParams})
+        .subscribe((data) => {
+          // answer = []
+          console.log('Received data from API', data)
+          // answer.push(data)
+          if (type === 'UTME') {
+            this.StatusMessagePushUTME.next(data.statusMessage);
+          }
+          else if (type === 'DE') {
+            this.StatusMessagePushDE.next(data.statusMessage);
+          }
           // BS.complete();
         });
 

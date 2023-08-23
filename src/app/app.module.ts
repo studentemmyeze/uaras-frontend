@@ -20,7 +20,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -62,7 +62,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule, FormsModule,
     MatGridListModule, MatExpansionModule,
     MatInputModule,
-    MatCheckboxModule,
+    MatCheckboxModule, MatDatepickerModule,
     MatAutocompleteModule,
     MatSlideToggleModule, MatTooltipModule,
     ReactiveFormsModule, MatProgressSpinnerModule,
