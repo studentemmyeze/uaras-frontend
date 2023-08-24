@@ -77,7 +77,7 @@ export class AppComponent {
 
   percentDone: number = 0;
   uploadSuccess: boolean = false;
-  // apiUrl = "http://localhost:3000";//http://server.unizik.edu.ng:5001/
+  //apiUrl = "http://localhost:3000";//http://server.unizik.edu.ng:5001/
   apiUrl = 'https://uaras-backend.onrender.com';
   subscription: Subscription;
   
@@ -140,11 +140,15 @@ export class AppComponent {
 
   uploadAndProgress(files: File[]){
     console.log(files)
-
+    let type22 = 0
     var formData = new FormData();
     formData.append('file',files[0])
     console.log('this is type22:', this.candidateType)
-    formData.append('type', '');
+    if (this.schoolMap.get(this.candidateType) && this.schoolMap.get(this.candidateType)?.code) 
+    // @ts-ignore
+    {type22 = this.schoolMap.get(this.candidateType)?.code}
+
+    formData.append('type', type22.toString());
 
     this.busyStatus = true;
     this.http.post(`${this.apiUrl}/api/uploadutme`, formData, {reportProgress: true, observe: 'events'})
@@ -419,11 +423,25 @@ uploadButtonDE(): void {
 
 uploadAndProgressDE(files: File[]){
   console.log(files)
-
+  let type22 = 0;
   var formData = new FormData();
   formData.append('file',files[0])
   console.log('this is type22:', this.candidateTypeDE)
-  formData.append('type', '');
+  // formData.append('type', '');
+
+
+
+  // console.log('this is type22:', this.candidateType)
+    if (this.schoolMap.get(this.candidateTypeDE) && this.schoolMap.get(this.candidateTypeDE)?.code) 
+    // @ts-ignore
+    {type22 = this.schoolMap.get(this.candidateTypeDE)?.code}
+
+    formData.append('type', type22.toString());
+
+
+
+
+
 
   this.busyStatusDE = true;
   this.http.post(`${this.apiUrl}/api/uploaddecandidate`, formData, {reportProgress: true, observe: 'events'})
