@@ -77,8 +77,8 @@ export class AppComponent {
 
   percentDone: number = 0;
   uploadSuccess: boolean = false;
-  //apiUrl = "http://localhost:3000";//http://server.unizik.edu.ng:5001/
-  apiUrl = 'https://uaras-backend.onrender.com';
+  apiUrl = "http://localhost:3000";//http://server.unizik.edu.ng:5001/
+  // apiUrl = 'https://uaras-backend.onrender.com';
   subscription: Subscription;
   
   selectedStatusMessage: Partial <StatusMessage> = {};
@@ -171,7 +171,13 @@ export class AppComponent {
     // @ts-ignore
     {aType = this.optionsMap.get(this.pushOption)?.code}
 
-    // queryParams = queryParams.append("type", aType );
+    queryParams = queryParams.append("type", aType );
+    queryParams = this.selectedModel.start ? queryParams.append("start", this.selectedModel.start.toString() ) : queryParams;
+    queryParams = this.selectedModel.stop ? queryParams.append("stop", this.selectedModel.stop.toString() ) : queryParams;
+    queryParams = this.selectedModel.sDate ? queryParams.append("datelast", this.selectedModel.sDate.toISOString().split('T')[0] ) : queryParams;
+    queryParams = this.selectedModel.delay ? queryParams.append("delays", this.selectedModel.delay.toString() ) : queryParams;
+    queryParams = this.selectedModel.batchsize ? queryParams.append("batchsize", this.selectedModel.batchsize.toString() ) : queryParams;
+    queryParams = this.selectedModel.programme ? queryParams.append("course", this.selectedModel.programme.toString() ) : queryParams;
 
     const oldParams = {
       name: 'Bill',
@@ -180,6 +186,7 @@ export class AppComponent {
 
     console.log(this.selectedModel as apiPushModel)
     const oldParams2 = this.selectedModel as apiPushModel
+    console.log({queryParams})
     if (oldParams2.sDate) {}
     const oldParams3 = {
       start: this.selectedModel.start ? this.selectedModel.start.toString() : undefined,
@@ -196,7 +203,7 @@ export class AppComponent {
     // @ts-ignore
     const newParams = new HttpParams({ fromObject: oldParams3})
     this.http
-        .get(`${this.apiUrl}/api/push-to-chuka-save`, { params: newParams }).subscribe((data)=> {
+        .get(`${this.apiUrl}/api/push-to-chuka-save`, { params: queryParams }).subscribe((data)=> {
           console.log(data);
         });
 
