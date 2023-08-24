@@ -171,7 +171,7 @@ export class AppComponent {
     // @ts-ignore
     {aType = this.optionsMap.get(this.pushOption)?.code}
 
-    queryParams = queryParams.append("type", aType );
+    // queryParams = queryParams.append("type", aType );
 
     const oldParams = {
       name: 'Bill',
@@ -188,6 +188,7 @@ export class AppComponent {
       delays: this.selectedModel.delay ? this.selectedModel.delay.toString() : undefined,
       batchsize: this.selectedModel.batchsize ? this.selectedModel.batchsize.toString() : undefined,
       course: this.selectedModel.programme ? this.selectedModel.programme.toString() : undefined,
+      type: aType
 
     }
     if (oldParams2.sDate) {console.log(oldParams2.sDate.toISOString().split('T')[0])}
