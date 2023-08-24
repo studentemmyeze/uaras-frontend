@@ -77,8 +77,8 @@ export class AppComponent {
 
   percentDone: number = 0;
   uploadSuccess: boolean = false;
-  apiUrl = "http://localhost:3000";//http://server.unizik.edu.ng:5001/
-  // apiUrl = 'https://uaras-backend.onrender.com';
+  //apiUrl = "http://localhost:3000";//http://server.unizik.edu.ng:5001/
+  apiUrl = 'https://uaras-backend.onrender.com';
   subscription: Subscription;
   
   selectedStatusMessage: Partial <StatusMessage> = {};
