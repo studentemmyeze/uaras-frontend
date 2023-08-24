@@ -303,9 +303,19 @@ if (this.busyStatusPushDE) {this.applicationService.getPushStatus('DE');}
 
   }
 
+  checkIfBusyPushUTME(): boolean {
+    let answer = false;
+    if (this.selectedStatusPushMessage.status === 'busy') {answer = true;}
+
+    return answer;
+
+  }
+
   ngOnInit(): void {
     this.applicationService.getStatus();
     this.applicationService.getStatus('DE');
+    this.applicationService.getPushStatus('UTME');
+    this.applicationService.getPushStatus('DE');
     // console.log("ON INIT")
     this.fileUploadForm = this.formBuilder.group({
       myfile: ['']
@@ -355,7 +365,7 @@ if (this.busyStatusPushDE) {this.applicationService.getPushStatus('DE');}
       // // @ts-ignore
 
       // this.mainvalueDE = this.selectedStatusMessageDE.rowdata_processed_success/this.selectedStatusMessageDE.total_rowdata_uploaded_to_api * 100
-      // if (this.checkIfBusyDE()) {this.busyStatusDE = true;}
+      if (this.checkIfBusyPushUTME()) {this.busyStatusPushUTME = true;}
 
       // console.log('mainValueDE::', this.mainvalueDE)
       // else if (this.selectedStatusMessage){this.busyStatus = false;}
