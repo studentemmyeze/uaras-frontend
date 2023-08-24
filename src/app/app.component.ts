@@ -357,6 +357,7 @@ if (this.busyStatusPushDE) {this.applicationService.getPushStatus('DE');}
 
     this.applicationService.StatusMessagePushUTME.subscribe((data: StatusMessage) => {
       this.selectedStatusPushMessage = data;
+      console.log({data})
       // @ts-ignore
       // this.totalvalueDE = (this.selectedStatusMessageDE.rowdata_saved_to_temp  + this.selectedStatusMessageDE.rowdata_processed_success  + this.selectedStatusMessageDE.rowdata_error)/(this.selectedStatusMessageDE.total_rowdata_uploaded_to_api * 2)*100
       // // @ts-ignore
