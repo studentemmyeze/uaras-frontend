@@ -208,6 +208,7 @@ export class AppComponent {
     console.log({oldParams3})
     // @ts-ignore
     const newParams = new HttpParams({ fromObject: oldParams3})
+    this.busyStatusPushUTME = true;
     this.http
         .get(`${this.apiUrl}/api/push-to-chuka-save`, { params: queryParams }).subscribe((data)=> {
           console.log(data);
