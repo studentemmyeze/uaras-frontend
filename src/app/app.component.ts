@@ -249,7 +249,7 @@ export class AppComponent {
 
     // console.log("schoolmap::",this.schoolMap)
     const source = interval(30000);
-    const source2 = interval(30000);
+    const source2 = interval(5000);
     this.subscription = source.subscribe(val =>
             // this.opensnack(text)
 
