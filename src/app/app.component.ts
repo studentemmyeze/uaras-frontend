@@ -389,6 +389,8 @@ if (this.busyStatusPushDE) {this.applicationService.getPushStatus('DE');}
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.subscriptionDE.unsubscribe();
+    this.subscriptionPushUTME.unsubscribe();
+    this.subscriptionPushDE.unsubscribe();
   }
 
 
