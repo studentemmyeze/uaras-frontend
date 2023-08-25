@@ -80,6 +80,12 @@ export class AppComponent {
   //apiUrl = "http://localhost:3000";//http://server.unizik.edu.ng:5001/
   apiUrl = 'https://uaras-backend.onrender.com';
   subscription: Subscription;
+
+  // for push
+  subscriptionPushDE: Subscription;
+  subscriptionPushUTME: Subscription;
+  busyStatusPushDE = false;
+  busyStatusPushUTME = false;
   
   selectedStatusMessage: Partial <StatusMessage> = {};
   selectedStatusPushMessage: Partial <StatusPushMessage> = {};
@@ -243,7 +249,7 @@ export class AppComponent {
 
     // console.log("schoolmap::",this.schoolMap)
     const source = interval(30000);
-
+    const source2 = interval(30000);
     this.subscription = source.subscribe(val =>
             // this.opensnack(text)
 
@@ -264,7 +270,7 @@ export class AppComponent {
 
 );
 
-this.subscriptionPushUTME = source.subscribe(val =>
+this.subscriptionPushUTME = source2.subscribe(val =>
   // this.opensnack(text)
 
 {
@@ -315,7 +321,7 @@ if (this.busyStatusPushDE) {this.applicationService.getPushStatus('DE');}
     this.applicationService.getStatus();
     this.applicationService.getStatus('DE');
     this.applicationService.getPushStatus('UTME');
-    this.applicationService.getPushStatus('DE');
+    // this.applicationService.getPushStatus('DE');
     // console.log("ON INIT")
     this.fileUploadForm = this.formBuilder.group({
       myfile: ['']
@@ -439,11 +445,7 @@ busyStatusDE = false;
 // uploadSub: Subscription;
 
 
-// for push
-subscriptionPushDE: Subscription;
-subscriptionPushUTME: Subscription;
-busyStatusPushDE = false;
-busyStatusPushUTME = false;
+
 
 
 

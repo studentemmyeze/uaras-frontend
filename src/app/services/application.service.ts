@@ -229,35 +229,6 @@ export class ApplicationService {
     return BS;
   }
 
-  // getStudentDistribution(type: string): void {
-  //   const query = `MATCH (n:Staff) where n.isDeleted = false and n.status = 1
-  //   and not (n.gender is null)  RETURN distinct(n.sType),n.gender, count(n) order by n.sType`;
-  //   const answer = [];
-  //   this.angularS.angularS.run(query).then((res: any) => {
-  //     for (const r of res) {
-  //       answer.push(r)
 
-  //     }
-  //     console.log('this is res from getStaffDistr: ', answer);
-  //     this.staffDistribution.next(answer);
-  //   });
-
-  //   const BS: AsyncSubject<any[]> = new AsyncSubject <any[]>();
-  //   let queryParams = new HttpParams();
-  //   queryParams = queryParams.append("regNo", studentJAMBRegNo );
-  //   queryParams = queryParams.append("type", type );
-  //   let answer = []
-  //   this.http.get<{studentRecord: Student, status: number}>(`${this.apiUrl}/api/check-valid-regno`,{params:queryParams})
-  //   .subscribe((data) => {
-  //     answer = []
-  //     console.log('Received data from API', data)
-  //     answer.push(data)
-  //     BS.next(answer);
-  //     BS.complete();
-  //   });
-
-  //   return BS;
-
-  // }
 
 }
