@@ -275,7 +275,10 @@ this.subscriptionPushUTME = source2.subscribe(val =>
   // this.opensnack(text)
 
 {
-if (this.busyStatusPushUTME) {this.applicationService.getPushStatus('UTME');}
+if (this.busyStatusPushUTME) {
+  this.applicationService.getPushStatus('UTME');
+  if (this.selectedStatusPushMessage.status = 'success') {this.busyStatusPushUTME = false}
+}
 
 }
 
