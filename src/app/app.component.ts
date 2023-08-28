@@ -62,7 +62,7 @@ export class AppComponent {
   // batchsizes: number = 100;
   // delays: number = 20;
 
-  checkedOption = [false,false,false, true, true, false]
+  checkedOption = [true,false,false, true, true, false]
   checkedstart: Boolean = false;
   checkedstop: Boolean = false;
   checkedbatchsize: Boolean = false;
@@ -71,7 +71,7 @@ export class AppComponent {
   endDate: Date | null | undefined;
   // selectedModel1: Partial <apiPushMode1> = {start:0, batchsize:100, delay:20};
   // selectedModel2: Partial <apiPushMode2> = {batchsize:100, delay:20};
-  selectedModel: Partial <apiPushModel> = {batchsize:100, delay:20};
+  selectedModel: Partial <apiPushModel> = {start:0,batchsize:100, delay:20};
   // selectedModelX: Partial <apiPushModelX> = {batchsize:"100", delay:"20"};
   file2Upload: File[] = [];
 
@@ -130,7 +130,8 @@ export class AppComponent {
   }
 
   resetAPIParams(): void {
-    this.checkedOption = [false, false, false, true, true, false];
+    this.checkedOption = [true, false, false, true, true, false];
+    this.selectedModel = {start:0,batchsize:100, delay:20};
   }
 
 //   checkMode(): boolean{
@@ -169,6 +170,17 @@ export class AppComponent {
         });
   }
 
+  viewPushInfo(): void {
+    // this.applicationService.getStatus('DE');
+    let aType = '';
+    if (this.optionsMap.get(this.pushOption) && this.optionsMap.get(this.pushOption)?.code) 
+    // @ts-ignore
+    {aType = this.optionsMap.get(this.pushOption)?.code}
+    
+    this.busyStatusPushUTME = true;
+    this.applicationService.getPushStatus(aType);
+  
+  }
 
   push2Chuka(type="UTME"): void {
     let aType = type
@@ -295,6 +307,16 @@ if (this.busyStatusPushDE) {this.applicationService.getPushStatus('DE');}
 );
 
 
+  }
+
+  checkStat(options: number): void {
+    if (!this.checkedOption[options]) {
+      if (options === 0) {this.selectedModel.start = 0}
+      else if (options === 1) {this.selectedModel.stop = undefined}
+      else if (options === 2) {this.selectedModel.sDate = undefined}
+      else if (options === 3) {this.selectedModel.batchsize = 100}
+      else if (options === 4) {this.selectedModel.delay = 20}
+    }
   }
 
   checkIfBusy(): boolean {

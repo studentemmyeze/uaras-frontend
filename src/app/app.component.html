@@ -495,20 +495,20 @@
 
     <div>
       <form>
-        <mat-checkbox [(ngModel)]="checkedOption[0]" name="checkedstart">
+        <mat-checkbox [(ngModel)]="checkedOption[0]" name="checkedstart" (change)= "checkStat(0)">
           <mat-form-field>
             <mat-label>Start</mat-label>
             <input matInput placeholder="begin point" [(ngModel)]="selectedModel.start" name="starts" [disabled] = "!checkedOption[0]">
           </mat-form-field>
         </mat-checkbox>
         <!--        <p>{{checkedstart}}</p>-->
-        <mat-checkbox [(ngModel)]="checkedOption[1]" name="checkedstop">
+        <mat-checkbox [(ngModel)]="checkedOption[1]" name="checkedstop" (change)= "checkStat(1)">
           <mat-form-field>
             <mat-label>Stop</mat-label>
             <input matInput placeholder="stop point" [(ngModel)]="selectedModel.stop" name="stops" [disabled] = "!checkedOption[1]">
           </mat-form-field>
         </mat-checkbox>
-        <mat-checkbox [(ngModel)]="checkedOption[2]" name="checkedsdate">
+        <mat-checkbox [(ngModel)]="checkedOption[2]" name="checkedsdate" (change)= "checkStat(2)">
 
           <mat-form-field (click)="pickerBD.open()">
             <mat-label>BEGIN DATE</mat-label>
@@ -525,21 +525,21 @@
         </mat-checkbox>
 
 
-        <mat-checkbox [(ngModel)]="checkedOption[3]" name="checkedbatchsize">
+        <mat-checkbox [(ngModel)]="checkedOption[3]" name="checkedbatchsize" (change)= "checkStat(3)">
           <mat-form-field class="example-full-width">
             <mat-label>Batch Size</mat-label>
             <input matInput placeholder="batchsize" [(ngModel)]="selectedModel.batchsize" name="batchsizes" [disabled] = "!checkedOption[3]">
           </mat-form-field>
         </mat-checkbox>
 
-        <mat-checkbox [(ngModel)]="checkedOption[4]" name="checkeddelay">
+        <mat-checkbox [(ngModel)]="checkedOption[4]" name="checkeddelay" (change)= "checkStat(4)">
           <mat-form-field class="example-full-width">
             <mat-label>Delay(s)</mat-label>
             <input matInput placeholder="delay(s)" [(ngModel)]="selectedModel.delay" name="delays" [disabled] = "!checkedOption[4]">
           </mat-form-field>
         </mat-checkbox>
 
-        <mat-checkbox [(ngModel)]="checkedOption[5]" name="checkedprogramme">
+        <mat-checkbox [(ngModel)]="checkedOption[5]" name="checkedprogramme" (change)= "checkStat(5)">
           <mat-form-field class="example-full-width">
             <mat-label>Programme</mat-label>
             <input matInput placeholder="programme" [(ngModel)]="selectedModel.programme" name="programme" [disabled] = "!checkedOption[5]">
@@ -549,8 +549,11 @@
 
       </form>
     </div>
-    
-    <button mat-stroked-button color="primary" (click)="push2Chuka()" > <mat-icon>upload</mat-icon>PUSH</button>
+    <div>
+      <button mat-stroked-button color="primary" (click)="push2Chuka()" > <mat-icon>upload</mat-icon>PUSH</button>
+      <button mat-stroked-button color="primary" (click)="viewPushInfo()">View Current Push Info</button>
+
+    </div>
     <mat-card>
       <p>Push Dashboard</p>
       <p>status: {{selectedStatusPushMessage.status}}</p>
