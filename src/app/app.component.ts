@@ -56,6 +56,9 @@ export interface apiPushMode2 {
 })
 
 export class AppComponent {
+// pushCheck() {
+//   pushCheck
+// }
   title = 'uaras-frontend';
   // starts: number = 0;
   // stops: number = 0;
