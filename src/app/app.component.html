@@ -555,7 +555,7 @@
 
     </div>
     <mat-card>
-      <p>Push Dashboard</p>
+      <p>Push {{this.optionsMap.get(this.pushOption)?.code}} Dashboard</p>
       <p>status: {{selectedStatusPushMessage.status}}</p>
       <p>time taken: {{selectedStatusPushMessage.time_taken}}</p>
       <p>successful push results: {{selectedStatusPushMessage.total_rowdata_pushed_to_api}} / {{selectedStatusPushMessage.total2push}}</p>
@@ -563,6 +563,18 @@
       <p>Number of batches sent: {{selectedStatusPushMessage.total_successful_batch}}</p>
 
     </mat-card>
+
+    <mat-card>
+      <p>Push Dashboard</p>
+      <p>status: {{selectedStatusPushMessageDE.status}}</p>
+      <p>time taken: {{selectedStatusPushMessageDE.time_taken}}</p>
+      <p>successful push results: {{selectedStatusPushMessageDE.total_rowdata_pushed_to_api}} / {{selectedStatusPushMessageDE.total2push}}</p>
+      <p>Error sending: {{selectedStatusPushMessageDE.total_error}}</p>
+      <p>Number of batches sent: {{selectedStatusPushMessageDE.total_successful_batch}}</p>
+
+    </mat-card>
+
+    
 
 
   </mat-card>

@@ -89,6 +89,7 @@ export class AppComponent {
   
   selectedStatusMessage: Partial <StatusMessage> = {};
   selectedStatusPushMessage: Partial <StatusPushMessage> = {};
+  selectedStatusPushMessageDE: Partial <StatusPushMessage> = {};
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   spinnerValue = 0;
@@ -174,10 +175,20 @@ export class AppComponent {
     // this.applicationService.getStatus('DE');
     let aType = '';
     if (this.optionsMap.get(this.pushOption) && this.optionsMap.get(this.pushOption)?.code) 
-    // @ts-ignore
-    {aType = this.optionsMap.get(this.pushOption)?.code}
     
-    this.busyStatusPushUTME = true;
+    {
+      // @ts-ignore
+      aType = this.optionsMap.get(this.pushOption)?.code
+      // this.selectedStatusPushMessage = {}
+    }
+    if (aType === 'UTME') {
+      this.busyStatusPushDE = false;
+      this.busyStatusPushUTME = true;
+    }
+    else {
+      this.busyStatusPushUTME = false;
+      this.busyStatusPushDE = true;}
+    
     this.applicationService.getPushStatus(aType);
   
   }
@@ -343,6 +354,14 @@ if (this.busyStatusPushDE) {this.applicationService.getPushStatus('DE');}
 
   }
 
+  checkIfBusyPushDE(): boolean {
+    let answer = false;
+    if (this.selectedStatusPushMessageDE.status === 'busy') {answer = true;}
+
+    return answer;
+
+  }
+
   ngOnInit(): void {
     this.applicationService.getStatus();
     this.applicationService.getStatus('DE');
@@ -399,6 +418,25 @@ if (this.busyStatusPushDE) {this.applicationService.getPushStatus('DE');}
 
       // this.mainvalueDE = this.selectedStatusMessageDE.rowdata_processed_success/this.selectedStatusMessageDE.total_rowdata_uploaded_to_api * 100
       if (this.checkIfBusyPushUTME()) {this.busyStatusPushUTME = true;}
+
+      // console.log('mainValueDE::', this.mainvalueDE)
+      // else if (this.selectedStatusMessage){this.busyStatus = false;}
+
+
+    });
+
+    this.applicationService.StatusMessagePushDE.subscribe((data: StatusMessage) => {
+      this.selectedStatusPushMessageDE = data;
+      console.log({data})
+      // @ts-ignore
+      // this.totalvalueDE = (this.selectedStatusMessageDE.rowdata_saved_to_temp  + this.selectedStatusMessageDE.rowdata_processed_success  + this.selectedStatusMessageDE.rowdata_error)/(this.selectedStatusMessageDE.total_rowdata_uploaded_to_api * 2)*100
+      // // @ts-ignore
+
+      // this.tempvalueDE = (this.selectedStatusMessageDE.rowdata_saved_to_temp/this.selectedStatusMessageDE.total_rowdata_uploaded_to_api)*100;
+      // // @ts-ignore
+
+      // this.mainvalueDE = this.selectedStatusMessageDE.rowdata_processed_success/this.selectedStatusMessageDE.total_rowdata_uploaded_to_api * 100
+      if (this.checkIfBusyPushDE()) {this.busyStatusPushDE = true;}
 
       // console.log('mainValueDE::', this.mainvalueDE)
       // else if (this.selectedStatusMessage){this.busyStatus = false;}
