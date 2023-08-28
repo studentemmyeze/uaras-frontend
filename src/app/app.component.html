@@ -550,7 +550,7 @@
       </form>
     </div>
     <div>
-      <button mat-stroked-button color="primary" (click)="push2Chuka()" > <mat-icon>upload</mat-icon>PUSH</button>
+      <button mat-stroked-button color="primary" (click)="push2Chuka(this.optionsMap.get(this.pushOption)?.code)" > <mat-icon>upload</mat-icon>PUSH</button>
       <button mat-stroked-button color="primary" (click)="viewPushInfo()">View Current Push Info</button>
 
     </div>
