@@ -242,6 +242,8 @@ export class AppComponent {
           console.log(data);
         });
 
+    this.applicationService.getPushStatus(aType);
+
     // this.http
     //     .get(`${this.apiUrl}/api/push-to-chuka`, { params: newParams })
     //     .pipe(catchError(error => of(error.url)));
