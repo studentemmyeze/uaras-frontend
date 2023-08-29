@@ -217,24 +217,26 @@ export class AppComponent {
     };
 
     console.log(this.selectedModel as apiPushModel)
-    const oldParams2 = this.selectedModel as apiPushModel
+    // const oldParams2 = this.selectedModel as apiPushModel
     console.log({queryParams})
-    if (oldParams2.sDate) {}
-    const oldParams3 = {
-      start: this.selectedModel.start ? this.selectedModel.start.toString() : undefined,
-      stop: this.selectedModel.stop ? this.selectedModel.stop.toString() : undefined,
-      datelast: this.selectedModel.sDate ? this.selectedModel.sDate.toISOString().split('T')[0] : undefined,
-      delays: this.selectedModel.delay ? this.selectedModel.delay.toString() : undefined,
-      batchsize: this.selectedModel.batchsize ? this.selectedModel.batchsize.toString() : undefined,
-      course: this.selectedModel.programme ? this.selectedModel.programme.toString() : undefined,
-      type: aType
+    // if (oldParams2.sDate) {}
+    // const oldParams3 = {
+    //   start: this.selectedModel.start ? this.selectedModel.start.toString() : undefined,
+    //   stop: this.selectedModel.stop ? this.selectedModel.stop.toString() : undefined,
+    //   datelast: this.selectedModel.sDate ? this.selectedModel.sDate.toISOString().split('T')[0] : undefined,
+    //   delays: this.selectedModel.delay ? this.selectedModel.delay.toString() : undefined,
+    //   batchsize: this.selectedModel.batchsize ? this.selectedModel.batchsize.toString() : undefined,
+    //   course: this.selectedModel.programme ? this.selectedModel.programme.toString() : undefined,
+    //   type: aType
 
-    }
-    if (oldParams2.sDate) {console.log(oldParams2.sDate.toISOString().split('T')[0])}
-    console.log({oldParams3})
+    // }
+    // if (oldParams2.sDate) {console.log(oldParams2.sDate.toISOString().split('T')[0])}
+    // console.log({oldParams3})
     // @ts-ignore
     const newParams = new HttpParams({ fromObject: oldParams3})
-    this.busyStatusPushUTME = true;
+    if (aType === 'UTME') {this.busyStatusPushUTME = true;}
+    else {this.busyStatusPushDE = true;}
+    
     this.http
         .get(`${this.apiUrl}/api/push-to-chuka-save`, { params: queryParams }).subscribe((data)=> {
           console.log(data);
